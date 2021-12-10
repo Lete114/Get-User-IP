@@ -1,0 +1,30 @@
+{
+  "name": "get-user-ip",
+  "version": "1.0.0",
+  "description": "一个轻量、小巧的Node.js模块，用于检索请求用户的IP地址 | A lightweight, small Node.js module to retrieve the IP address of the requesting user",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx mocha"
+  },
+  "keywords": [
+    "Request-IP",
+    "Get-Request-IP",
+    "User-IP",
+    "Get-User-IP",
+    "Client-IP",
+    "Get-Client-IP"
+  ],
+  "author": "Lete乐特",
+  "license": "MIT",
+  "homepage": "https://github.com/Lete114/Get-User-IP#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lete114/Get-User-IP.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Lete114/Get-User-IP/issues"
+  },
+  "devDependencies": {
+    "mocha": "^9.1.3"
+  }
+}
