@@ -1,0 +1,10 @@
+{
+  "name": "get-user-ip-vercel",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "get-user-ip": "latest"
+  }
+}
