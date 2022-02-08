@@ -27,7 +27,7 @@ const http = require('http')
 
 const server = http.createServer((req,res)=>{
   res.end(GetUserIP(req))
-}))
+})
 
 server.listen(6870)
 
@@ -41,7 +41,7 @@ If there are some special cases, such as the use of `CloudFlare`, you can append
 const server = http.createServer((req,res)=>{
   // This gives priority to getting headers.cf-connecting-ip, and if it doesn't exist, continue with the default parameters
   res.end(GetUserIP(req,['headers.cf-connecting-ip']))
-}))
+})
 ```
 
 ## How It Works

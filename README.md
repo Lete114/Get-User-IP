@@ -27,7 +27,7 @@ const http = require('http')
 
 const server = http.createServer((req,res)=>{
   res.end(GetUserIP(req))
-}))
+})
 
 server.listen(6870)
 
@@ -41,7 +41,7 @@ server.listen(6870)
 const server = http.createServer((req,res)=>{
   // 这时优先获取 headers.cf-connecting-ip ，如果不存在则继续按默认参数执行
   res.end(GetUserIP(req,['headers.cf-connecting-ip']))
-}))
+})
 ```
 
 ## 它是如何工作的
