@@ -5,7 +5,7 @@ const IP = '999.999.999.999'
 const defaultIP = '0.0.0.0'
 
 it('Request is undefined', () => {
-  const reg = /Request Object Should Not Be Null Or Undefined/g
+  const reg = /"req" parameter is not legal/g
   let error = ''
   try {
     GetUserIP()

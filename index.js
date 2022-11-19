@@ -17,9 +17,7 @@ function GetProperty(obj, str) {
   try {
     str = str.replace(/\[(\w+)\]/g, '.$1') // Handles array subscripts
     let arr = str.split('.')
-    for (const i in arr) {
-      obj = obj[arr[i]] || ''
-    }
+    for (const i of arr) obj = obj[i]
     return obj
   } catch (e) {}
   return null
@@ -27,24 +25,21 @@ function GetProperty(obj, str) {
 
 /**
  * Obtain real IP address of the client
- * @param {Object} req Request Object
+ * @param {IncomingMessage} req Request Object
  * @param {Array} headers [Options] Custom Obtain Request Object Headers Info
  * @returns {String} IP - If not, it is returned by default '0.0.0.0'
  */
 function GetClientIP(req, headers = []) {
-  if (!req) throw new Error('Request Object Should Not Be Null Or Undefined')
+  if (Object.prototype.toString.call(req) !== '[object Object]') {
+    throw new Error('"req" parameter is not legal')
+  }
 
-  const connectionSocket = req.connection && req.connection.socket
-  const condition = req.headers || req.connection || connectionSocket || req.socket
+  headers = [...headers, ...defaultHeaders]
 
-  if (condition || headers.length) {
-    headers = [...headers, ...defaultHeaders]
-
-    for (const header of headers) {
-      const ip = GetProperty(req, header)
-      if (ip) {
-        return ip.split(',')[0].trim()
-      }
+  for (const header of headers) {
+    const ip = GetProperty(req, header)
+    if (ip) {
+      return ip.split(',')[0].trim()
     }
   }
 
