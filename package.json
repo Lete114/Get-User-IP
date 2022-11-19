@@ -4,8 +4,11 @@
   "description": "一个轻量、小巧的Node.js模块，用于检索请求用户的IP地址 | A lightweight, small Node.js module to retrieve the IP address of the requesting user",
   "main": "index.js",
   "scripts": {
-    "test": "npx mocha"
+    "test": "mocha"
   },
+  "files": [
+    "index.js"
+  ],
   "keywords": [
     "Request-IP",
     "Get-Request-IP",
