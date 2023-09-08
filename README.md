@@ -55,6 +55,7 @@ const defaultHeaders = [
   'headers.x-client-ip',
   'headers.x-real-ip',
   'headers.x-forwarded-for', // 该头信息会返回多个IP，格式为: (客户IP, 代理1 IP,代理2 IP...) 所以返回第一个
+  'headers.x-nf-client-connection-ip',
   'connection.remoteAddress',
   'socket.remoteAddress',
   'connection.socket.remoteAddress'
