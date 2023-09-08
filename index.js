@@ -2,6 +2,7 @@ const defaultHeaders = [
   'headers.x-client-ip',
   'headers.x-real-ip',
   'headers.x-forwarded-for',
+  'headers.x-nf-client-connection-ip',
   'connection.remoteAddress',
   'socket.remoteAddress',
   'connection.socket.remoteAddress'
