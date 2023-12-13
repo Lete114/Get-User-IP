@@ -15,7 +15,7 @@ const defaultHeaders = [
  */
 function GetProperty(obj, str) {
   try {
-    str = str.replace(/\[(\w+)\]/g, '.$1') // Handles array subscripts
+    str = str.replace(/\[['"]?([^'"]+)['"]?]/g, '.$1') // Handles array subscripts
     let arr = str.split('.')
     for (const i of arr) obj = obj[i]
     return obj

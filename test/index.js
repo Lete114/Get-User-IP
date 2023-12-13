@@ -134,3 +134,18 @@ describe('Custom Request Headers', () => {
     assert.strictEqual(GetUserIP(req, ['headers.cf-connecting-ip']), IP)
   })
 })
+
+describe('JavaScript dynamic syntax', () => {
+  it('dynamic syntax', () => {
+    const req = {
+      headers: {
+        'cf-connecting-ip': IP
+      }
+    }
+    assert.strictEqual(GetUserIP(req, ['headers[cf-connecting-ip]']), IP)
+    assert.strictEqual(GetUserIP(req, [`headers['cf-connecting-ip']`]), IP)
+    assert.strictEqual(GetUserIP(req, ['headers["cf-connecting-ip"]']), IP)
+    assert.strictEqual(GetUserIP(req, [`headers['cf-connecting-ip"]`]), IP)
+    assert.strictEqual(GetUserIP(req, [`headers["cf-connecting-ip']`]), IP)
+  })
+})
