@@ -1,11 +1,11 @@
 <div align="right">
-  Language:
-  US
-  <a title="Chinese" href="/README.md">中文</a>
+  语言:
+  中文
+  <a title="English" href="README.md">English</a>
 </div>
 
 <h1 align="center"><a href="https://github.com/lete114/Get-User-IP" target="_blank">Get-User-IP</a></h1>
-<p align="center">A lightweight, small Node.js module to retrieve the IP address of the requesting user</p>
+<p align="center">一个轻量、小巧的Node.js模块，用于检索请求用户的IP地址</p>
 
 <p align="center">
     <a href="https://github.com/Lete114/Get-User-IP/releases/"><img src="https://img.shields.io/npm/v/get-user-ip" alt="Version"></a>
@@ -13,13 +13,13 @@
     <a href="https://github.com/Lete114/Get-User-IP/blob/master/LICENSE"><img src="https://img.shields.io/github/license/Lete114/Get-User-IP?color=FF5531" alt="MIT License"></a>
 </p>
 
-## Installation
+## 安装
 
 ```bash
 npm install get-user-ip --save
 ```
 
-## Getting Started
+## 快速开始
 
 ```javascript
 const GetUserIP = require('get-user-ip')
@@ -31,34 +31,32 @@ const server = http.createServer((req,res)=>{
 
 server.listen(6870)
 
-// on localhost you'll see 127.0.0.1 if you're using IPv4
-// or ::1, ::ffff:127.0.0.1 if you're using IPv6
+// 如果你使用IPv4，在localhost上你会看到127.0.0.1
+// 如果你使用的是IPv6，则为::1, ::fffff:127.0.0.1
 ```
 
-If there are some special cases, such as the use of `CloudFlare`, you can append a second parameter, which is an array so it can contain more than one params
+如果有一些特殊情况的话，例如使用了`CloudFlare`就可以追加第二个参数，它是一个数组所以可以包含多个
 
 ```javascript
 const server = http.createServer((req,res)=>{
-  // This gives priority to getting headers.cf-connecting-ip, and if it doesn't exist, continue with the default parameters
+  // 这时优先获取 headers.cf-connecting-ip ，如果不存在则继续按默认参数执行
   res.end(GetUserIP(req,['headers.cf-connecting-ip']))
 })
 ```
 
-## How It Works
+## 它是如何工作的
 
-It looks for a specific header in the request and returns the `0.0.0.0` default if it does not exist
+它在请求中寻找特定的头信息，如果不存在，则返回`0.0.0.0`默认值
 
-The user IP is determined by the following order
+用户 IP 是由以下顺序决定的
 
 ```javascript
 const defaultHeaders = [
   'headers.x-client-ip',
   'headers.x-real-ip',
-  'headers.x-forwarded-for', // This header will return multiple IP addresses, Format: (Client IP, Proxy 1 IP, Proxy 2 IP...) So return the first
+  'headers.x-forwarded-for', // 该头信息会返回多个IP，格式为: (客户IP, 代理1 IP,代理2 IP...) 所以返回第一个
   'connection.remoteAddress',
   'socket.remoteAddress',
   'connection.socket.remoteAddress'
 ]
 ```
-
-

@@ -1,6 +1,6 @@
 {
   "name": "get-user-ip",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "一个轻量、小巧的Node.js模块，用于检索请求用户的IP地址 | A lightweight, small Node.js module to retrieve the IP address of the requesting user",
   "main": "index.js",
   "scripts": {
