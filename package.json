@@ -1,14 +1,26 @@
 {
   "name": "get-user-ip",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "一个轻量、小巧的Node.js模块，用于检索请求用户的IP地址 | A lightweight, small Node.js module to retrieve the IP address of the requesting user",
-  "main": "index.js",
+  "main": "get-user-ip.cjs",
+  "module": "get-user-ip.mjs",
+  "types": "get-user-ip.d.ts",
+  "type": "module",
   "scripts": {
     "test": "mocha"
   },
   "files": [
-    "index.js"
+    "get-user-ip.cjs",
+    "get-user-ip.mjs",
+    "get-user-ip.d.ts"
   ],
+  "exports": {
+    ".": {
+      "import": "./get-user-ip.mjs",
+      "require": "./get-user-ip.cjs",
+      "types": "./get-user-ip.d.ts"
+    }
+  },
   "keywords": [
     "Request-IP",
     "Get-Request-IP",

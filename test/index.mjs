@@ -1,5 +1,5 @@
-const assert = require('assert')
-const GetUserIP = require('../index')
+import { equal, strictEqual } from 'assert'
+import GetUserIP from '../get-user-ip.mjs'
 
 const IP = '999.999.999.999'
 const defaultIP = '0.0.0.0'
@@ -12,20 +12,20 @@ it('Request is undefined', () => {
   } catch (e) {
     error = e.toString()
   }
-  assert.equal(reg.test(error), true)
+  equal(reg.test(error), true)
 })
 
 describe('Request Headers', () => {
   it('Request Headers is undefined', () => {
     const req = {}
     const res = GetUserIP(req)
-    assert.equal(res, defaultIP)
+    equal(res, defaultIP)
   })
 
   it('Request Headers failed to get return 0.0.0.0', () => {
     const req = { headers: true }
     const result = GetUserIP(req)
-    assert.strictEqual(result, defaultIP)
+    strictEqual(result, defaultIP)
   })
 
   it('x-client-ip', () => {
@@ -34,7 +34,7 @@ describe('Request Headers', () => {
         'x-client-ip': IP
       }
     }
-    assert.strictEqual(GetUserIP(req), IP)
+    strictEqual(GetUserIP(req), IP)
   })
 
   it('x-real-ip', () => {
@@ -43,7 +43,7 @@ describe('Request Headers', () => {
         'x-real-ip': IP
       }
     }
-    assert.strictEqual(GetUserIP(req), IP)
+    strictEqual(GetUserIP(req), IP)
   })
 
   it('x-forwarded-for', () => {
@@ -53,7 +53,7 @@ describe('Request Headers', () => {
         'x-forwarded-for': IPS
       }
     }
-    assert.strictEqual(GetUserIP(req), IP)
+    strictEqual(GetUserIP(req), IP)
   })
 })
 
@@ -61,13 +61,13 @@ describe('Request Connection', () => {
   it('Request Connection is undefined', () => {
     const req = {}
     const res = GetUserIP(req)
-    assert.equal(res, defaultIP)
+    equal(res, defaultIP)
   })
 
   it('Request Connection Socket is undefined', () => {
     const req = {}
     const res = GetUserIP(req)
-    assert.equal(res, defaultIP)
+    equal(res, defaultIP)
   })
 
   it('connection.remoteAddress', () => {
@@ -76,7 +76,7 @@ describe('Request Connection', () => {
         remoteAddress: IP
       }
     }
-    assert.strictEqual(GetUserIP(req), IP)
+    strictEqual(GetUserIP(req), IP)
   })
 
   it('connection.socket.remoteAddress', () => {
@@ -85,7 +85,7 @@ describe('Request Connection', () => {
         socket: { remoteAddress: IP }
       }
     }
-    assert.strictEqual(GetUserIP(req), IP)
+    strictEqual(GetUserIP(req), IP)
   })
 })
 
@@ -93,7 +93,7 @@ describe('Request Socket', () => {
   it('Request Socket is undefined', () => {
     const req = {}
     const res = GetUserIP(req)
-    assert.equal(res, defaultIP)
+    equal(res, defaultIP)
   })
 
   it('socket.remoteAddress', () => {
@@ -102,7 +102,7 @@ describe('Request Socket', () => {
         remoteAddress: IP
       }
     }
-    assert.strictEqual(GetUserIP(req), IP)
+    strictEqual(GetUserIP(req), IP)
   })
 })
 
@@ -110,7 +110,7 @@ describe('Custom Request Headers', () => {
   it('Custom Request Headers is undefined', () => {
     const req = {}
     const res = GetUserIP(req)
-    assert.equal(res, defaultIP)
+    equal(res, defaultIP)
   })
 
   // Return to Custom
@@ -120,7 +120,7 @@ describe('Custom Request Headers', () => {
         'cf-connecting-ip': IP
       }
     }
-    assert.strictEqual(GetUserIP(req, ['headers.cf-connecting-ip']), IP)
+    strictEqual(GetUserIP(req, ['headers.cf-connecting-ip']), IP)
   })
 
   // Whether to Return cf-connecting-ip
@@ -131,7 +131,7 @@ describe('Custom Request Headers', () => {
         'cf-connecting-ip': IP // 999.999.999.999
       }
     }
-    assert.strictEqual(GetUserIP(req, ['headers.cf-connecting-ip']), IP)
+    strictEqual(GetUserIP(req, ['headers.cf-connecting-ip']), IP)
   })
 })
 
@@ -142,10 +142,10 @@ describe('JavaScript dynamic syntax', () => {
         'cf-connecting-ip': IP
       }
     }
-    assert.strictEqual(GetUserIP(req, ['headers[cf-connecting-ip]']), IP)
-    assert.strictEqual(GetUserIP(req, [`headers['cf-connecting-ip']`]), IP)
-    assert.strictEqual(GetUserIP(req, ['headers["cf-connecting-ip"]']), IP)
-    assert.strictEqual(GetUserIP(req, [`headers['cf-connecting-ip"]`]), IP)
-    assert.strictEqual(GetUserIP(req, [`headers["cf-connecting-ip']`]), IP)
+    strictEqual(GetUserIP(req, ['headers[cf-connecting-ip]']), IP)
+    strictEqual(GetUserIP(req, [`headers['cf-connecting-ip']`]), IP)
+    strictEqual(GetUserIP(req, ['headers["cf-connecting-ip"]']), IP)
+    strictEqual(GetUserIP(req, [`headers['cf-connecting-ip"]`]), IP)
+    strictEqual(GetUserIP(req, [`headers["cf-connecting-ip']`]), IP)
   })
 })

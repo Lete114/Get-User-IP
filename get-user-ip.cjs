@@ -9,11 +9,11 @@ const defaultHeaders = [
 
 /**
  * Get property values dynamically
- * @param {Object} obj Object
- * @param {String} str Get object string
- * @returns {String} Object property values
+ * @param { Record<string, any> } obj Object
+ * @param { string } str Get object string
+ * @returns { string } Object property values
  */
-function GetProperty(obj, str) {
+function get_property(obj, str) {
   try {
     str = str.replace(/\[['"]?([^'"]+)['"]?]/g, '.$1') // Handles array subscripts
     let arr = str.split('.')
@@ -25,11 +25,11 @@ function GetProperty(obj, str) {
 
 /**
  * Obtain real IP address of the client
- * @param {IncomingMessage} req Request Object
- * @param {Array} headers [Options] Custom Obtain Request Object Headers Info
- * @returns {String} IP - If not, it is returned by default '0.0.0.0'
+ * @param { IncomingMessage } req Request Object
+ * @param { string[] } headers [Options] Custom Obtain Request Object Headers Info
+ * @returns { string } IP - If not, it is returned by default '0.0.0.0'
  */
-function GetClientIP(req, headers = []) {
+function get_client_ip(req, headers = []) {
   if (Object.prototype.toString.call(req) !== '[object Object]') {
     throw new Error('"req" parameter is not legal')
   }
@@ -37,7 +37,7 @@ function GetClientIP(req, headers = []) {
   headers = [...headers, ...defaultHeaders]
 
   for (const header of headers) {
-    const ip = GetProperty(req, header)
+    const ip = get_property(req, header)
     if (ip) {
       return ip.split(',')[0].trim()
     }
@@ -46,4 +46,5 @@ function GetClientIP(req, headers = []) {
   return '0.0.0.0'
 }
 
-module.exports = GetClientIP
+module.exports = get_client_ip
+module.exports.get_client_ip = get_client_ip
